@@ -3,6 +3,7 @@ package br.com.fiap.praticando;
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class PokemonComStream {
@@ -23,13 +24,23 @@ public class PokemonComStream {
                     }
                 } while (!nome.equals("FIM"));
                 String escolha = JOptionPane.showInputDialog("Digite um tipo qualquer a sua escolha").toUpperCase();
-                String nomesEncontrados = "";
 
                 List<String> pokemon = pokedex.entrySet().stream()
-                        .filter( tipos -> tipos.getValue().equalsIgnoreCase(escolha)
-                        .collect(Collectors.toList());
+                    .filter(tipos -> tipos.getValue().equalsIgnoreCase(escolha))
+                    .map(Map.Entry::getKey)
+                    .collect(Collectors.toList());
 
-                JOptionPane.showMessageDialog(null, String.format("Para o tipo: %s foram encontrado(s) o(s) pokémon(s):\n %s", escolha, ), "Pokémons", JOptionPane.INFORMATION_MESSAGE);
+                String nomesEncontrados = pokemon.stream()
+                   .map(name -> "- " + name)
+                   .collect(Collectors.joining("\n"));
+
+                JOptionPane.showMessageDialog(
+                   null,
+                   String.format("Para o tipo: %s foram encontrado(s) o(s) Pokémon(s):\n %s", escolha, nomesEncontrados),
+                   "Pokémons",
+                   JOptionPane.INFORMATION_MESSAGE
+                );
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
