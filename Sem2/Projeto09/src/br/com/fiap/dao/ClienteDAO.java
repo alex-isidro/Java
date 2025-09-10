@@ -18,44 +18,43 @@ public class ClienteDAO {
         return con;
     }
 
-    public String inserir(Cliente cliente){
-        String sql = "insert into ddd_cliente(id_cliente,nome_cliente,placa) values(?,?,?)";
-        try (PreparedStatement ps =getCon().prepareStatement(sql);){
+    public String inserir (Cliente cliente) {
+        String sql = "insert into ddd_cliente(id_cliente, nome_cliente, placa) values(?,?,?)";
+        try (PreparedStatement ps = getCon().prepareStatement(sql);) {
             ps.setInt(1, cliente.getIdCliente());
             ps.setString(2, cliente.getNomeCliente());
             ps.setString(3, cliente.getPlaca());
-
             if (ps.executeUpdate() > 0) {
                 return "Inserido com sucesso.";
             } else {
                 return "Erro ao inserir";
             }
         } catch (SQLException e) {
-            return "Erro de SQL: " + e.getMessage();
+            return "Erro de SQL: 11 "+ e.getMessage();
         }
     }
-    public String alterar (Cliente cliente){
-        String sql = "update ddd_carro set cor=?, descricao=? where placa=?";
-        try(PreparedStatement ps = getCon().prepareStatement(sql);) {
-            ps.setInt(1, cliente.getIdCliente());
-            ps.setString(2, cliente.getNomeCliente());
-            ps.setString(3, cliente.getPlaca());
+
+    public String alterar (Cliente cliente) {
+        String sql = "update ddd_cliente set nome_cliente=?, placa=? where id_cliente=?";
+        try (PreparedStatement ps = getCon().prepareStatement(sql);) {
+            ps.setString(1, cliente.getNomeCliente());
+            ps.setString(2, cliente.getPlaca());
+            ps.setInt(3, cliente.getIdCliente());
             if (ps.executeUpdate() > 0) {
                 return "Alterado com sucesso.";
             } else {
                 return "Erro ao alterar";
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             return "Erro de SQL: " + e.getMessage();
         }
     }
-    public String excluir(Cliente cliente){
-        String sql = "delete from ddd_cliente where placa = ?";
-
+    public String excluir (Cliente cliente) {
+        String sql = "delete from ddd_cliente where id_cliente=?";
         try (PreparedStatement ps = getCon().prepareStatement(sql);) {
-            ps.setString(1, cliente.getPlaca());
+            ps.setInt(1, cliente.getIdCliente());
             if (ps.executeUpdate() > 0) {
-                return "Excluído com sucesso.";
+                return "Excluido com sucesso.";
             } else {
                 return "Erro ao excluir";
             }
@@ -64,16 +63,16 @@ public class ClienteDAO {
         }
     }
     public ArrayList<Cliente> listarTodos() {
-        String sql = "select * from ddd_cliente order by placa";
-        ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
-        try (PreparedStatement ps = getCon().prepareStatement (sql);
+        String sql = "select * from ddd_cliente order by id_cliente";
+        ArrayList<Cliente> listaCliente =new ArrayList<Cliente>();
+        try (PreparedStatement ps = getCon().prepareStatement(sql);
              ResultSet rs = ps.executeQuery();) {
             if (rs != null) {
                 while (rs.next()) {
-                    Cliente cliente = new Cliente();
-                    cliente.setPlaca (rs.getString(1));
+                    Cliente cliente =new Cliente();
+                    cliente.setIdCliente(rs.getInt(1));
                     cliente.setNomeCliente(rs.getString(2));
-                    cliente.setIdCliente(rs.getInt(3));
+                    cliente.setPlaca(rs.getString(3));
                     listaCliente.add(cliente);
                 }
                 return listaCliente;
