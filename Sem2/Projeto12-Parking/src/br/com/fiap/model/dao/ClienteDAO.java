@@ -1,6 +1,5 @@
 package br.com.fiap.model.dao;
 
-import br.com.fiap.model.dto.Carro;
 import br.com.fiap.model.dto.Cliente;
 
 import java.sql.Connection;
@@ -22,7 +21,7 @@ public class ClienteDAO implements IDAO {
 
     public String inserir(Object object) {
         cliente = (Cliente) object;
-        String sql = "insert into ddd_cliente(NOME_CLIENTE,placa) values(?,?)";
+        String sql = "insert into ddd_cliente(nome_cliente,placa) values(?,?)";
         try (PreparedStatement ps = getCon().prepareStatement(sql);) {
             ps.setString(1, cliente.getNomeCliente());
             ps.setString(2, cliente.getPlaca());

@@ -1,9 +1,7 @@
 package br.com.fiap.view;
 
 import br.com.fiap.controller.CarroController;
-
 import javax.swing.*;
-import java.awt.*;
 
 public class CarroView {
     public static void main(String[] args) {
