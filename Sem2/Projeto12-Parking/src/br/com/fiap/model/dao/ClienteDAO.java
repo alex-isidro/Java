@@ -24,7 +24,7 @@ public class ClienteDAO implements IDAO {
         String sql = "insert into ddd_cliente(nome_cliente,placa) values(?,?)";
         try (PreparedStatement ps = getCon().prepareStatement(sql)) {
             ps.setString(1, cliente.getNomeCliente());
-            ps.setString(2, cliente.getPlaca());
+            ps.setString(2, cliente.getPlaca().toUpperCase());
             if (ps.executeUpdate() > 0) {
                 return "Inserido com sucesso.";
             } else {
@@ -40,7 +40,7 @@ public class ClienteDAO implements IDAO {
         String sql = "update ddd_cliente set nome_cliente=?,placa=? where id_cliente=?";
         try (PreparedStatement ps = getCon().prepareStatement(sql)) {
             ps.setString(1, cliente.getNomeCliente());
-            ps.setString(2, cliente.getPlaca());
+            ps.setString(2, cliente.getPlaca().toUpperCase());
             ps.setInt(3, cliente.getIdCliente());
             if (ps.executeUpdate() > 0) {
                 return "Alterado com sucesso.";

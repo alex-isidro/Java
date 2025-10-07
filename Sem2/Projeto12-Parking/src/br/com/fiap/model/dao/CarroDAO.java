@@ -23,7 +23,7 @@ public class CarroDAO implements IDAO {
         carro = (Carro) object;
         String sql = "insert into ddd_carro(placa,cor,descricao) values(?,?,?)";
         try (PreparedStatement ps = getCon().prepareStatement(sql);) {
-            ps.setString(1, carro.getPlaca());
+            ps.setString(1, carro.getPlaca().toUpperCase());
             ps.setString(2, carro.getCor());
             ps.setString(3, carro.getDescricao());
             if (ps.executeUpdate() > 0) {
@@ -42,7 +42,7 @@ public class CarroDAO implements IDAO {
         try (PreparedStatement ps = getCon().prepareStatement(sql);) {
             ps.setString(1, carro.getCor());
             ps.setString(2, carro.getDescricao());
-            ps.setString(3, carro.getPlaca());
+            ps.setString(3, carro.getPlaca().toUpperCase());
             if (ps.executeUpdate() > 0) {
                 return "Alterado com sucesso.";
             } else {
@@ -57,7 +57,7 @@ public class CarroDAO implements IDAO {
         carro = (Carro) object;
         String sql = "delete from ddd_carro where placa = ?";
         try (PreparedStatement ps = getCon().prepareStatement(sql);) {
-            ps.setString(1, carro.getPlaca());
+            ps.setString(1, carro.getPlaca().toUpperCase());
             if (ps.executeUpdate() > 0) {
                 return "Excluído com sucesso.";
             } else {
@@ -73,7 +73,7 @@ public class CarroDAO implements IDAO {
         String sql = "select * from ddd_carro where placa = ?";
 
         try (PreparedStatement ps = getCon().prepareStatement(sql);) {
-            ps.setString(1, carro.getPlaca());
+            ps.setString(1, carro.getPlaca().toUpperCase());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return String.format("Placa: %s\nCor: %s\nDescrição: %s",
