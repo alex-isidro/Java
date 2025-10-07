@@ -1,15 +1,15 @@
 package br.com.fiap.model.dto;
 
 public class Cliente {
-    private int idClidente;
+    private int idCliente;
     private String nomeCliente, placa;
 
-    public int getIdClidente() {
-        return idClidente;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setIdClidente(int idClidente) {
-        this.idClidente = idClidente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getNomeCliente() {

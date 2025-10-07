@@ -17,21 +17,21 @@ public class ClienteView {
                     case 0:
                         nome = JOptionPane.showInputDialog("Digite o nome do cliente");
                         placa = JOptionPane.showInputDialog("Digite a placa do carro");
-                        System.out.println(clienteController.inserir(nome, placa));
+                        System.out.println(clienteController.inserirCliente(nome, placa));
                         break;
                     case 1:
                         id = Integer.parseInt(JOptionPane.showInputDialog("Digite o Id do cliente"));
                         nome = JOptionPane.showInputDialog("Digite o NOVO nome do cliente");
                         placa = JOptionPane.showInputDialog("Digite a NOVA placa do carro");
-                        System.out.println(clienteController.alterar(id, nome, placa));
+                        System.out.println(clienteController.alterarCliente(id, nome, placa));
                         break;
                     case 2:
                         id = Integer.parseInt(JOptionPane.showInputDialog("Digite o Id do cliente"));
-                        System.out.println(clienteController.delete(id));
+                        System.out.println(clienteController.excluirCliente(id));
                         break;
                     case 3:
                         id = Integer.parseInt(JOptionPane.showInputDialog("Digite o Id do cliente"));
-                        JOptionPane.showMessageDialog(null, clienteController.listar(id));
+                        JOptionPane.showMessageDialog(null, clienteController.listarUmCliente(id));
                         break;
                     default:
                         System.out.println("Opção inválida!");

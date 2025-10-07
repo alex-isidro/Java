@@ -22,7 +22,7 @@ public class ClienteDAO implements IDAO {
     public String inserir(Object object) {
         cliente = (Cliente) object;
         String sql = "insert into ddd_cliente(nome_cliente,placa) values(?,?)";
-        try (PreparedStatement ps = getCon().prepareStatement(sql);) {
+        try (PreparedStatement ps = getCon().prepareStatement(sql)) {
             ps.setString(1, cliente.getNomeCliente());
             ps.setString(2, cliente.getPlaca());
             if (ps.executeUpdate() > 0) {
@@ -37,11 +37,11 @@ public class ClienteDAO implements IDAO {
 
     public String alterar(Object object) {
         cliente = (Cliente) object;
-        String sql = "update ddd_cliente set NOME_CLIENTE = ?, placa = ? where id_cliente = ?";
-        try (PreparedStatement ps = getCon().prepareStatement(sql);) {
+        String sql = "update ddd_cliente set nome_cliente=?,placa=? where id_cliente=?";
+        try (PreparedStatement ps = getCon().prepareStatement(sql)) {
             ps.setString(1, cliente.getNomeCliente());
             ps.setString(2, cliente.getPlaca());
-            ps.setInt(3, cliente.getIdClidente());
+            ps.setInt(3, cliente.getIdCliente());
             if (ps.executeUpdate() > 0) {
                 return "Alterado com sucesso.";
             } else {
@@ -54,9 +54,9 @@ public class ClienteDAO implements IDAO {
 
     public String excluir(Object object) {
         cliente = (Cliente) object;
-        String sql = "delete from ddd_cliente where id_cliente = ?";
+        String sql = "delete from ddd_cliente where id_cliente=?";
         try (PreparedStatement ps = getCon().prepareStatement(sql)) {
-            ps.setInt(1, cliente.getIdClidente());
+            ps.setInt(1, cliente.getIdCliente());
             if (ps.executeUpdate() > 0) {
                 return "Excluído com sucesso.";
             } else {
@@ -69,20 +69,17 @@ public class ClienteDAO implements IDAO {
 
     public String listarUm(Object object) {
         cliente = (Cliente) object;
-        String sql = "select * from ddd_cliente where id_cliente = ?";
+        String sql = "select * from ddd_cliente where id_cliente=?";
         try (PreparedStatement ps = getCon().prepareStatement(sql)) {
-            ps.setInt(1, cliente.getIdClidente());
+            ps.setInt(1, cliente.getIdCliente());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return String.format("ID: %d\nNome: %s\nPlaca: %s\n",
-                   rs.getInt("id_cliente"),
-                   rs.getString("NOME_CLIENTE"),
-                   rs.getString("placa"));
+                return "Id: " + cliente.getIdCliente() + "\nNome: " + rs.getString("nome_cliente") + "\nPlaca: " + rs.getString("placa");
             } else {
                 return "Registro não encontrado!";
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return "Erro de SQL: " + e.getMessage();
         }
     }
 }
