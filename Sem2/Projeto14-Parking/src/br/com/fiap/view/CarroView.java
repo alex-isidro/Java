@@ -31,7 +31,7 @@ public class CarroView {
                         System.out.println(carroController.excluirCarro(placa));
                         break;
                     case 3:
-                        System.out.println(carroController.listarCarro(placa));
+                        System.out.println(carroController.listarUmCarro(placa));
 
                         break;
                     default:

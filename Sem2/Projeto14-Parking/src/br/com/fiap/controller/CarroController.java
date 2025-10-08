@@ -47,7 +47,7 @@ public class CarroController {
         return resultado;
     }
 
-    public String listarCarro(String placa) throws ClassNotFoundException, SQLException {
+    public String listarUmCarro(String placa) throws ClassNotFoundException, SQLException {
         String resultado;
         Connection con = ConnectionFactory.abrirConexao();
         Carro carro = new Carro();
