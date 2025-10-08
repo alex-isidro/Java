@@ -9,7 +9,7 @@ public class GUIPrincipal extends JFrame{
     private Container contentPane;
     private JMenuBar mnBarra;
     private JMenu mnArquivo, mnCadastro;
-    private JMenuItem miSair, miCarro;
+    private JMenuItem miSair, miCarro, miCliente;
 
     public GUIPrincipal() throws HeadlessException {
         inicializarComponentes();
@@ -24,17 +24,22 @@ public class GUIPrincipal extends JFrame{
         mnBarra = new JMenuBar();
         mnArquivo = new JMenu("Arquivo");
         mnArquivo.setMnemonic('A');
+
         mnCadastro = new JMenu("Cadastro");
         mnCadastro.setMnemonic('C');
+
         miSair = new JMenuItem("Sair", new ImageIcon(
            getClass().getResource("images/exit_icon.png")));
+
         miCarro = new JMenuItem("Carro");
+        miCliente =  new JMenuItem("Cliente");
 
         setJMenuBar(mnBarra);
         mnBarra.add(mnArquivo);
         mnBarra.add(mnCadastro);
         mnArquivo.add(miSair);
         mnCadastro.add(miCarro);
+        mnCadastro.add(miCliente);
     }
 
     private void definirEventos() {
@@ -51,6 +56,16 @@ public class GUIPrincipal extends JFrame{
                 GUICarro carro = new GUICarro();
                 contentPane.removeAll();
                 contentPane.add(carro);
+                contentPane.validate();
+            }
+        });
+
+        miCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GUICliente cliente = new GUICliente();
+                contentPane.removeAll();
+                contentPane.add(cliente);
                 contentPane.validate();
             }
         });
