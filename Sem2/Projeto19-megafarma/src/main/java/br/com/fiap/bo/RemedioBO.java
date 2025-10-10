@@ -14,6 +14,11 @@ public class RemedioBO {
         // aqui se implementa a regra de negócios
         return remedioDAO.findAll();
     }
+    public RemedioTO findByCodigo (Long codigo) {
+        remedioDAO = new RemedioDAO();
+
+        return remedioDAO.findByCodigo(codigo);
+    }
 
     public RemedioTO save (RemedioTO remedio) {
         remedioDAO = new RemedioDAO();
