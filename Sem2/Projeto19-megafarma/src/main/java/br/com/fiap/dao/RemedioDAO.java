@@ -13,8 +13,7 @@ public class RemedioDAO {
     public ArrayList<RemedioTO> findAll() {
         ArrayList<RemedioTO> remedios = new ArrayList<>();
         String sql = "select * from ddd_remedios order by codigo";
-        try(PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql))
-        {
+        try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             if (ps != null) {
                 while (rs.next()) {
